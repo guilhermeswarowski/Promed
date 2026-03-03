@@ -62,6 +62,8 @@ with tab_lista:
     negocios = listar_negocios()
     if negocios:
         df = pd.DataFrame(negocios)
+        if "criado_em" in df.columns:
+            df["criado_em"] = pd.to_datetime(df["criado_em"]).dt.strftime("%d/%m/%Y %H:%M")
         df_show = df[["id","titulo","cliente_nome","valor","estagio","probabilidade","data_fechamento"]].copy()
         df_show.columns = ["ID","Título","Cliente","Valor (R$)","Estágio","Prob. (%)","Fechamento"]
         st.dataframe(df_show, use_container_width=True, hide_index=True)

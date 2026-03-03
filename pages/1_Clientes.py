@@ -48,6 +48,7 @@ with tab_lista:
         if filtro_status != "Todos":
             df = df[df["status"] == filtro_status]
 
+        df["criado_em"] = pd.to_datetime(df["criado_em"]).dt.strftime("%d/%m/%Y %H:%M")
         df_show = df[["id","nome","email","telefone","empresa","status","origem","criado_em"]].copy()
         df_show.columns = ["ID","Nome","Email","Telefone","Empresa","Status","Origem","Criado em"]
         st.dataframe(df_show, use_container_width=True, hide_index=True)
