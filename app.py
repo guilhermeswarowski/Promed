@@ -36,7 +36,13 @@ st.markdown("""
 
 # ─── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.image("https://via.placeholder.com/200x60/1a1f36/667eea?text=Promed+CRM", width=200)
+    st.markdown(
+        "<div style='text-align:center;padding:12px 0 4px;'>"
+        "<span style='font-size:1.6rem;font-weight:700;color:#667eea;'>🏥 Promed</span>"
+        "<br><span style='font-size:.75rem;color:#94a3b8;letter-spacing:2px;'>CRM</span>"
+        "</div>",
+        unsafe_allow_html=True,
+    )
     st.markdown("---")
     st.markdown("### 📋 Menu")
     st.page_link("app.py",             label="🏠  Dashboard",  )
