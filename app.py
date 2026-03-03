@@ -50,7 +50,10 @@ with st.sidebar:
     st.page_link("pages/2_Negocios.py",  label="💼  Negócios",   )
     st.page_link("pages/3_Atividades.py",label="📅  Atividades", )
     st.markdown("---")
-    st.caption("© 2026 Promed · v1.0")
+    st.markdown(
+        "<div style='position:fixed;bottom:16px;font-size:.75rem;color:#64748b;'>© 2026 Promed · v1.0</div>",
+        unsafe_allow_html=True,
+    )
 
 # ─── Dashboard ────────────────────────────────────────────────────────────────
 st.title("🏠 Dashboard")
