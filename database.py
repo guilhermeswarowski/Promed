@@ -4,17 +4,28 @@ from supabase import create_client, Client
 
 load_dotenv()
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+def _get_credentials():
+    """Lê credenciais do Streamlit Cloud (secrets.toml) ou do .env local."""
+    try:
+        import streamlit as st
+        url = st.secrets["SUPABASE_URL"]
+        key = st.secrets["SUPABASE_KEY"]
+        return url, key
+    except Exception:
+        url = os.getenv("SUPABASE_URL")
+        key = os.getenv("SUPABASE_KEY")
+        if not url or not key:
+            raise EnvironmentError(
+                "Credenciais do Supabase não encontradas.\n"
+                "Crie um arquivo .env com SUPABASE_URL e SUPABASE_KEY."
+            )
+        return url, key
 
 
 def get_client() -> Client:
-    if not SUPABASE_URL or not SUPABASE_KEY:
-        raise EnvironmentError(
-            "Variáveis SUPABASE_URL e SUPABASE_KEY não encontradas.\n"
-            "Crie um arquivo .env com as credenciais do Supabase."
-        )
-    return create_client(SUPABASE_URL, SUPABASE_KEY)
+    url, key = _get_credentials()
+    return create_client(url, key)
 
 
 def init_db():
